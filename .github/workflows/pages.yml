@@ -26,47 +26,8 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: ""
-      # Keep earlier versions online so the directions can be compared: version 1 at /v1/.
-      - uses: actions/checkout@v4
-        with:
-          ref: v1
-          path: v1-src
-      - run: cd v1-src && npm ci && npm run build && mv out ../out/v1
-        env:
-          NEXT_PUBLIC_BASE_PATH: /v1
-      # And version 2 at /v2/.
-      - uses: actions/checkout@v4
-        with:
-          ref: v2
-          path: v2-src
-      - run: cd v2-src && npm ci && npm run build && mv out ../out/v2
-        env:
-          NEXT_PUBLIC_BASE_PATH: /v2
-      # And version 3 at /v3/.
-      - uses: actions/checkout@v4
-        with:
-          ref: v3
-          path: v3-src
-      - run: cd v3-src && npm ci && npm run build && mv out ../out/v3
-        env:
-          NEXT_PUBLIC_BASE_PATH: /v3
-      # And version 4 at /v4/ (the site as it was when the domain went live, 5 Nov 2026).
-      - uses: actions/checkout@v4
-        with:
-          ref: v4
-          path: v4-src
-      - run: cd v4-src && npm ci && npm run build && mv out ../out/v4
-        env:
-          NEXT_PUBLIC_BASE_PATH: /v4
-      # And version 5 at /v5/ (the notebook story, 5 Nov 2026).
-      - uses: actions/checkout@v4
-        with:
-          ref: v5
-          path: v5-src
-      - run: cd v5-src && npm ci && npm run build && mv out ../out/v5
-        env:
-          NEXT_PUBLIC_BASE_PATH: /v5
+          NEXT_PUBLIC_BASE_PATH: /econsexpo2027
+          NEXT_PUBLIC_SITE_URL: https://vivaanmavani.github.io/econsexpo2027
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
