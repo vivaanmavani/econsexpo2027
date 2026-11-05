@@ -3,11 +3,11 @@
    The drawing survives as lines only: the symbol, and a line from a photo to what it shows. */
 
 :root {
-  --paper: #f3f4f0;
-  --paper-2: #e9ebe5;
+  --paper: #f7f2e6;
+  --paper-2: #ede6d6;
   --ink: #121a16;
   --ink-soft: #55615b;
-  --rule: #d5d9d2;
+  --rule: #ddd6c4;
   --green: #1f5e3b;
   --green-ink: #174a2e;
   --green-soft: #dfe9e2;
@@ -126,7 +126,7 @@ body {
   background: #fff;
 }
 .b6--ghost-light {
-  border-color: rgba(243, 244, 240, 0.6);
+  border-color: rgba(247, 242, 230, 0.6);
   color: var(--paper);
 }
 .b6--ghost-light:hover {
@@ -329,7 +329,7 @@ body {
 }
 .o6__facts dt {
   font-size: 13px;
-  color: rgba(243, 244, 240, 0.65);
+  color: rgba(247, 242, 230, 0.65);
 }
 .o6__facts dd {
   margin: 2px 0 0;
@@ -337,7 +337,7 @@ body {
 }
 .o6__tbc {
   font-weight: 400;
-  color: rgba(243, 244, 240, 0.7);
+  color: rgba(247, 242, 230, 0.7);
 }
 .o6__ctas {
   display: flex;
@@ -350,8 +350,8 @@ body {
   align-items: center;
   gap: 14px;
   font-size: 13px;
-  color: rgba(243, 244, 240, 0.7);
-  border-top: 1px solid rgba(243, 244, 240, 0.2);
+  color: rgba(247, 242, 230, 0.7);
+  border-top: 1px solid rgba(247, 242, 230, 0.2);
   padding-top: 18px;
 }
 .o6__host .sjii {

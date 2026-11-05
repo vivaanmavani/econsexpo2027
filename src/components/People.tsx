@@ -97,11 +97,12 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-type PortraitProps = { member: Member; size?: "lg" | "md" | "sm"; className?: string; style?: React.CSSProperties };
+type PortraitProps = { member: Member; size?: "lg" | "md" | "sm"; className?: string; style?: React.CSSProperties; preview?: boolean };
 
 /** A headshot that circles itself in ink on hover or focus, and opens the profile on click. */
-export function Portrait({ member, size = "md", className = "", style }: PortraitProps) {
+export function Portrait({ member, size = "md", className = "", style, preview }: PortraitProps) {
   const open = useContext(OpenProfile);
+  const blurb = member.intro ?? groups.find((g) => g.id === member.group)?.blurb;
   return (
     <button
       type="button"
@@ -116,6 +117,11 @@ export function Portrait({ member, size = "md", className = "", style }: Portrai
         ) : (
           <span className="monogram" aria-hidden="true">
             {initials(member.name)}
+          </span>
+        )}
+        {preview && blurb && (
+          <span className="portrait__preview" aria-hidden="true">
+            {blurb}
           </span>
         )}
         <svg className="portrait__ring ink" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">

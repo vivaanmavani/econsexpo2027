@@ -32,7 +32,7 @@ export function Cursor() {
       if (tagged) label.current!.textContent = tagged.dataset.cursor ?? "";
     };
 
-    const magnets = new Map<Element, (e: PointerEvent) => void>();
+    const magnets = new Map<HTMLElement, [(e: PointerEvent) => void, () => void]>();
     const attach = () => {
       document.querySelectorAll<HTMLElement>(".btn").forEach((b) => {
         if (magnets.has(b)) return;
@@ -43,18 +43,27 @@ export function Cursor() {
         const ml = () => gsap.to(b, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.45)" });
         b.addEventListener("pointermove", mm);
         b.addEventListener("pointerleave", ml);
-        magnets.set(b, mm);
+        magnets.set(b, [mm, ml]);
       });
     };
     attach();
     const mo = new MutationObserver(attach);
     mo.observe(document.body, { childList: true, subtree: true });
     window.addEventListener("pointermove", move, { passive: true });
-    document.documentElement.addEventListener("pointerleave", () => gsap.to(el, { autoAlpha: 0, duration: 0.2 }));
-    document.documentElement.addEventListener("pointerenter", () => gsap.to(el, { autoAlpha: 1, duration: 0.2 }));
+    const root = document.documentElement;
+    const leave = () => gsap.to(el, { autoAlpha: 0, duration: 0.2 });
+    const enter = () => gsap.to(el, { autoAlpha: 1, duration: 0.2 });
+    root.addEventListener("pointerleave", leave);
+    root.addEventListener("pointerenter", enter);
     return () => {
       window.removeEventListener("pointermove", move);
+      root.removeEventListener("pointerleave", leave);
+      root.removeEventListener("pointerenter", enter);
       mo.disconnect();
+      magnets.forEach(([mm, ml], b) => {
+        b.removeEventListener("pointermove", mm);
+        b.removeEventListener("pointerleave", ml);
+      });
     };
   }, [gsap]);
 

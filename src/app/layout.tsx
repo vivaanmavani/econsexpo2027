@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/bricolage-grotesque/standard.css";
+import "@fontsource/kalam/700.css";
 import "./globals.css";
 import "./v6.css";
+import "./expo.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
@@ -21,12 +23,12 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Econs Expo",
     locale: "en_SG",
-    images: [{ url: `${SITE_URL}/media/og.jpg`, width: 1200, height: 630, alt: "Students at Econs Expo 2026" }],
+    images: [{ url: `${SITE_URL}/media/og.jpg`, width: 1200, height: 630, alt: "Participants at Econs Expo 2026" }],
   },
   twitter: { card: "summary_large_image" },
 };
 
-export const viewport: Viewport = { themeColor: "#f3f4f0" };
+export const viewport: Viewport = { themeColor: "#f7f2e6" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

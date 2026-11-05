@@ -5,7 +5,7 @@ import { useGsap, prefersReducedMotion } from "@/lib/motion";
 import { markReady } from "@/lib/ready";
 
 /**
- * A short opening (about 1.6 s, first visit per session only): the wordmark sets, the marker
+ * A short opening (about 1.2 s, first visit per session only): the wordmark sets, the marker
  * loops it, and the sheet lifts. The page underneath is already rendered and usable.
  */
 export function Loader() {
@@ -29,11 +29,11 @@ export function Loader() {
     const n = { v: 0 };
     const tl = gsap
       .timeline({ onComplete: () => setGone(true) })
-      .fromTo(".ld__char", { yPercent: 110 }, { yPercent: 0, duration: 0.7, stagger: 0.035, ease: "power4.out" }, 0.05)
-      .fromTo(".ld__loop", { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.9, ease: "power2.inOut" }, 0.3)
-      .to(n, { v: 100, duration: 1.1, ease: "power2.inOut", onUpdate: () => (count.textContent = String(Math.round(n.v)).padStart(3, "0")) }, 0)
-      .add(() => markReady(), 1.2)
-      .to(el, { clipPath: "inset(0 0 100% 0)", duration: 0.85, ease: "expo.inOut" }, 1.25);
+      .fromTo(".ld__char", { yPercent: 110 }, { yPercent: 0, duration: 0.5, stagger: 0.025, ease: "power4.out" }, 0.03)
+      .fromTo(".ld__loop", { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.55, ease: "power2.inOut" }, 0.15)
+      .to(n, { v: 100, duration: 0.7, ease: "power2.inOut", onUpdate: () => (count.textContent = String(Math.round(n.v)).padStart(3, "0")) }, 0)
+      .add(() => markReady(), 0.7)
+      .to(el, { clipPath: "inset(0 0 100% 0)", duration: 0.6, ease: "expo.inOut" }, 0.62);
     return () => {
       tl.kill();
     };

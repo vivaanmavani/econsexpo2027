@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Photo } from "@/components/Photo";
-import { experiences, site } from "@/content/site";
+import { EventStatus, RegisterLink } from "@/components/EventStatus";
+import { baseStatus, experiences, site } from "@/content/site";
 import { faqs } from "@/content/faqs";
 
 export const metadata: Metadata = {
   title: "Attend",
   description: "Date, venue, who can come and how to register interest for Econs Expo 2027.",
 };
-
 
 export default function AttendPage() {
   return (
@@ -25,7 +25,7 @@ export default function AttendPage() {
           <div>
             <dt>Date</dt>
             <dd>
-              {site.date.label} <span className="tbc">to be confirmed</span>
+              {site.date.label} {baseStatus.dateNote && <span className="tbc">{baseStatus.dateNote}</span>}
             </dd>
           </div>
           <div>
@@ -37,8 +37,8 @@ export default function AttendPage() {
             </dd>
           </div>
           <div>
-            <dt>Who</dt>
-            <dd>Around 150 students from schools across Singapore</dd>
+            <dt>Expected attendance</dt>
+            <dd>{site.participants.label} from schools across Singapore</dd>
           </div>
           <div>
             <dt>Experiences</dt>
@@ -52,20 +52,15 @@ export default function AttendPage() {
           </div>
         </dl>
         <figure className="attend__photo">
-          <Photo slug="hall-wide" alt="The 2026 conference hall full of students at round tables" sizes="(max-width: 860px) 100vw, 45vw" />
+          <Photo slug="hall-wide" alt="The 2026 conference hall full of participants at round tables" sizes="(max-width: 860px) 100vw, 45vw" />
           <figcaption className="hand">the hall in 2026</figcaption>
         </figure>
       </section>
 
       <section id="register" className="wrap attend__register" aria-labelledby="reg-title">
         <h2 id="reg-title" className="display">Register interest</h2>
-        <p>
-          Registration opens soon. Follow{" "}
-          <a href={site.instagram} target="_blank" rel="noopener noreferrer">
-            @econs_expo on Instagram
-          </a>{" "}
-          to hear first.
-        </p>
+        <EventStatus />
+        {baseStatus.registration !== "pending" && <RegisterLink className="b6 b6--ink" />}
       </section>
 
       <section className="wrap attend__faq" aria-labelledby="faq-title">

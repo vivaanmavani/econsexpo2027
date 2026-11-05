@@ -16,8 +16,6 @@ export type Member = {
   photo?: string;
   intro?: string;
   links?: Link[];
-  /** Something about this entry still needs confirming before launch. */
-  check?: string;
 };
 
 export type GroupId = "core" | "marketing" | "finance" | "academics";
@@ -43,13 +41,14 @@ export const members: Member[] = [
   { slug: "nicholas", name: "Nicholas Lai", role: "Marketing & Outreach", group: "marketing", photo: "nicholas" },
 
   { slug: "aarav", name: "Aarav Karnik", role: "Finance & Logistics", group: "finance", photo: "aarav" },
-  { slug: "miguel", name: "Miguel Sacloco", role: "Finance & Logistics", group: "finance", photo: "miguel", check: "Spelling: Instagram says Sacloco, the Marketing doc says Saclolo" },
+  // Published spelling. To confirm with the organisers: the Marketing doc spells this surname differently.
+  { slug: "miguel", name: "Miguel Sacloco", role: "Finance & Logistics", group: "finance", photo: "miguel" },
 
   { slug: "gopal", name: "Gopal Nath", role: "Academics & Creativity", group: "academics", photo: "gopal" },
-  // Listed in the Marketing doc but without an Instagram slide yet. Shown without a photo.
-  { slug: "sara", name: "Sara Mahajan", role: "Academics & Creativity", group: "academics", check: "No Instagram slide yet" },
-  { slug: "emma", name: "Emma Song", role: "Academics & Creativity", group: "academics", check: "No Instagram slide yet" },
-  { slug: "natasha", name: "Natasha Malhotra", role: "Academics & Creativity", group: "academics", check: "Not on the Master Control sheet or Instagram yet" },
+  // No portrait supplied yet for these three, so they use the initials treatment.
+  { slug: "sara", name: "Sara Mahajan", role: "Academics & Creativity", group: "academics" },
+  { slug: "emma", name: "Emma Song", role: "Academics & Creativity", group: "academics" },
+  { slug: "natasha", name: "Natasha Malhotra", role: "Academics & Creativity", group: "academics" },
 ];
 
 export const coreTeam = members.filter((m) => m.core);

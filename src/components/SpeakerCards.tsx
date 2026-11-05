@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { edition2026 } from "@/content/site";
+import { edition2026, type Speaker } from "@/content/site";
 import { asset } from "@/lib/asset";
 import { useGsap, prefersReducedMotion } from "@/lib/motion";
 
-type Speaker = (typeof edition2026.speakers)[number];
+type Props = { tone?: "light" | "dark"; speakers?: Speaker[]; edition?: string };
 
-/** The 2026 guest speakers as photo cards. Each opens a profile with a short, sourced bio. */
-export function SpeakerCards({ tone = "light" }: { tone?: "light" | "dark" }) {
+/** Guest speakers in a level row. Each opens a profile with a short, sourced bio. */
+export function SpeakerCards({ tone = "light", speakers = edition2026.speakers, edition = "2026" }: Props) {
   const root = useRef<HTMLUListElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLElement | null>(null);
@@ -23,11 +23,8 @@ export function SpeakerCards({ tone = "light" }: { tone?: "light" | "dark" }) {
     if (prefersReducedMotion()) return;
     const el = root.current!;
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".sc__card",
-        { autoAlpha: 0, y: 60, rotate: (i) => [-4, 3, -2, 4][i % 4] },
-        { autoAlpha: 1, y: 0, rotate: (i) => [-1.5, 1, -0.5, 1.5][i % 4], duration: 1, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 80%" } },
-      );
+      // A timing stagger only: every card finishes at zero offset, so the row stays level.
+      gsap.fromTo(".sc__card", { autoAlpha: 0, y: 36 }, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.08, ease: "power3.out", clearProps: "transform", scrollTrigger: { trigger: el, start: "top 82%" } });
     }, el);
     return () => ctx.revert();
   }, [gsap]);
@@ -43,14 +40,15 @@ export function SpeakerCards({ tone = "light" }: { tone?: "light" | "dark" }) {
 
   return (
     <>
-      <ul className={`sc sc--${tone}`} ref={root}>
-        {edition2026.speakers.map((s) => (
+      <ul className={`sc sc--${tone}`} ref={root} style={{ ["--cols" as string]: speakers.length }}>
+        {speakers.map((s) => (
           <li key={s.slug}>
             <button
               type="button"
               className="sc__card"
               data-cursor="Read"
               aria-haspopup="dialog"
+              aria-label={`Read the biography of ${s.name}, ${s.role}, ${s.org}`}
               onClick={(e) => {
                 opener.current = e.currentTarget;
                 setCurrent(s);
@@ -63,8 +61,8 @@ export function SpeakerCards({ tone = "light" }: { tone?: "light" | "dark" }) {
               <span className="sc__role">
                 {s.role}, {s.org}
               </span>
-              <span className="sc__more hand" aria-hidden="true">
-                read more →
+              <span className="sc__more" aria-hidden="true">
+                Read biography
               </span>
             </button>
           </li>
@@ -91,7 +89,7 @@ export function SpeakerCards({ tone = "light" }: { tone?: "light" | "dark" }) {
               <img src={asset(`/media/speakers/${current.slug}.jpg`)} alt={`Portrait of ${current.name}`} width={480} height={480} />
             </div>
             <div className="profile__body">
-              <p className="eyebrow">Guest speaker · Econs Expo 2026</p>
+              <p className="eyebrow">Guest speaker, Econs Expo {edition}</p>
               <h2 id="speaker-name" className="profile__name">
                 {current.name}
               </h2>
@@ -100,7 +98,7 @@ export function SpeakerCards({ tone = "light" }: { tone?: "light" | "dark" }) {
               </p>
               <p className="profile__intro">{current.bio}</p>
               <p className="sc__note">
-                Title as at Econs Expo 2026.
+                Title as at Econs Expo {edition}.
                 {current.source && (
                   <>
                     {" "}

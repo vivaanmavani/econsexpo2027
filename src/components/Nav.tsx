@@ -4,14 +4,14 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { goTo } from "@/lib/goto";
-import { registerHref } from "@/content/site";
+import { RegisterLink } from "@/components/EventStatus";
 import { SjiiLogo } from "@/components/SjiiLogo";
 
 // Every link glides to its section on the homepage. The full pages are linked from inside each section.
 const links = [
-  { href: "/#events", label: "Events" },
   { href: "/#speakers", label: "Speakers" },
   { href: "/#2026", label: "2026" },
+  { href: "/#events", label: "Events" },
   { href: "/#team", label: "Team" },
   { href: "/#attend", label: "Attend" },
 ];
@@ -65,9 +65,7 @@ export function Nav() {
             </Link>
           ))}
         </nav>
-        <Link href={registerHref} className="btn btn--ink nav__cta" onClick={glide(registerHref)}>
-          Register interest
-        </Link>
+        <RegisterLink className="btn btn--ink nav__cta" onClick={() => setOpen(false)} />
         <button
           ref={btn}
           className="nav__menu"
@@ -86,9 +84,7 @@ export function Nav() {
               {l.label}
             </Link>
           ))}
-          <Link href={registerHref} className="btn btn--ink" onClick={glide(registerHref)}>
-            Register interest
-          </Link>
+          <RegisterLink className="btn btn--ink" onClick={() => setOpen(false)} />
         </nav>
       </div>
     </header>

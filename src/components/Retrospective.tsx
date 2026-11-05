@@ -107,7 +107,7 @@ export function Retrospective() {
                 Watch the 2026 film <span className="hand">with sound, 1:21</span>
               </span>
             </Film>
-            <Link href="/2026/" className="btn btn--line-light" data-cursor="Look">
+            <Link prefetch={false} href="/2026/" className="btn btn--line-light" data-cursor="Look">
               Photos and programme
             </Link>
           </div>

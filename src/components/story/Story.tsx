@@ -258,7 +258,7 @@ export function Story() {
               <Link href={registerHref} className="btn btn--ink btn--big">
                 Register interest
               </Link>
-              <Link href="/attend/" className="btn btn--line btn--big">
+              <Link prefetch={false} href="/attend/" className="btn btn--line btn--big">
                 How the day works
               </Link>
             </div>

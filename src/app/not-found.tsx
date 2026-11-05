@@ -18,7 +18,7 @@ export default function NotFound() {
           <Link href="/" className="btn btn--ink">
             Back to the homepage
           </Link>
-          <Link href="/attend/" className="btn btn--line">
+          <Link prefetch={false} href="/attend/" className="btn btn--line">
             How to attend
           </Link>
         </div>

@@ -81,7 +81,7 @@ export function Closing() {
             <Link href={registerHref} className="btn btn--paper btn--big">
               Register interest
             </Link>
-            <Link href="/attend/" className="btn btn--line-light btn--big">
+            <Link prefetch={false} href="/attend/" className="btn btn--line-light btn--big">
               How the day works
             </Link>
           </div>

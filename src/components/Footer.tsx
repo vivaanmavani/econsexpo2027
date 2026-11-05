@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { site, registerHref } from "@/content/site";
+import { site } from "@/content/site";
+import { RegisterLink } from "@/components/EventStatus";
 import { SjiiLogo } from "@/components/SjiiLogo";
 
 export function Footer() {
@@ -7,7 +8,7 @@ export function Footer() {
     <footer className="foot">
       <div className="wrap foot__grid">
         <div>
-          <p className="foot__word">Econs Expo</p>
+          <p className="foot__word">Econs Expo 2027</p>
           <p className="foot__sub">
             A student-led inter-school economics conference, hosted by {site.venue.name}.
           </p>
@@ -25,10 +26,10 @@ export function Footer() {
           <h2 className="eyebrow">Explore</h2>
           <ul className="foot__list">
             <li><Link href="/#events">Events</Link></li>
-            <li><Link href="/team/">Meet the whole team</Link></li>
-            <li><Link href="/2026/">Econs Expo 2026 photos</Link></li>
-            <li><Link href="/#attend">Attend</Link></li>
-            <li><Link href={registerHref}>Register interest</Link></li>
+            <li><Link prefetch={false} href="/team/">Meet the whole team</Link></li>
+            <li><Link prefetch={false} href="/2026/">Econs Expo 2026 photos</Link></li>
+            <li><Link prefetch={false} href="/attend/">Attend</Link></li>
+            <li><RegisterLink /></li>
           </ul>
         </div>
         <div>
